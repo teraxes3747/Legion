@@ -1,1 +1,336 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Каналы - Присоединяйтесь!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Анимированные частицы */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .particle:nth-child(1) { width: 20px; height: 20px; left: 10%; animation-delay: 0s; }
+        .particle:nth-child(2) { width: 15px; height: 15px; left: 20%; animation-delay: 1s; }
+        .particle:nth-child(3) { width: 25px; height: 25px; left: 30%; animation-delay: 2s; }
+        .particle:nth-child(4) { width: 18px; height: 18px; left: 40%; animation-delay: 3s; }
+        .particle:nth-child(5) { width: 22px; height: 22px; left: 50%; animation-delay: 4s; }
+        .particle:nth-child(6) { width: 16px; height: 16px; left: 60%; animation-delay: 5s; }
+        .particle:nth-child(7) { width: 28px; height: 28px; left: 70%; animation-delay: 2.5s; }
+        .particle:nth-child(8) { width: 14px; height: 14px; left: 80%; animation-delay: 1.5s; }
+        .particle:nth-child(9) { width: 24px; height: 24px; left: 90%; animation-delay: 0.5s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 50px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+            z-index: 2;
+            position: relative;
+            border: 2px solid rgba(102, 126, 234, 0.3);
+            animation: slideUp 1s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, #2196F3, #1976D2);
+            border-radius: 50%;
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 35px;
+            color: white;
+            box-shadow: 0 10px 20px rgba(33, 150, 243, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        h1 {
+            color: #1565C0;
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            color: #424242;
+            font-size: 1.2em;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .channels {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .channel {
+            background: linear-gradient(135deg, #2196F3, #1976D2);
+            border: none;
+            border-radius: 15px;
+            padding: 20px 30px;
+            color: white;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 15px rgba(33, 150, 243, 0.3);
+        }
+
+        .channel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .channel:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(33, 150, 243, 0.4);
+        }
+
+        .channel:hover::before {
+            left: 100%;
+        }
+
+        .channel:active {
+            transform: translateY(-2px);
+        }
+
+        .channel-icon {
+            margin-right: 10px;
+            font-size: 1.3em;
+        }
+
+        .info {
+            background: rgba(33, 150, 243, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 30px;
+            border: 2px solid rgba(33, 150, 243, 0.2);
+        }
+
+        .info h3 {
+            color: #1565C0;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .info p {
+            color: #616161;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .feature {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            border: 2px solid rgba(33, 150, 243, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-3px);
+        }
+
+        .feature-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .feature-text {
+            color: #424242;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 20px;
+                margin: 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .channel {
+                padding: 15px 20px;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .footer {
+            margin-top: 30px;
+            color: #9E9E9E;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <div class="container">
+        <div class="logo">📱</div>
+        <h1>Наши Telegram Каналы</h1>
+        <p class="subtitle">Присоединяйтесь к нашему сообществу и получайте самый актуальный контент каждый день!</p>
+        
+        <div class="channels">
+            <a href="https://t.me/+VUDtn7ulfrY4NjUx" target="_blank" class="channel">
+                <span class="channel-icon">⚔️</span>
+                Канал Легиона
+            </a>
+            
+            <a href="https://t.me/+Xztbs_52kOFkYWE0" target="_blank" class="channel">
+                <span class="channel-icon">💎</span>
+                Канал Кости
+            </a>
+        </div>
+
+
+
+        <div class="info">
+            <h3>О наших каналах</h3>
+            <p>⚔️ <strong>Канал Легиона</strong> - специализируется на RAT программах, удаленном администрировании и технических решениях для системного контроля</p>
+            <p>💎 <strong>Канал Кости</strong> - место для общения, обсуждений, обмена опытом и дружеского взаимодействия в нашем сообществе</p>
+        </div>
+
+        <div class="footer">
+            Нажмите на кнопку канала, чтобы присоединиться!
+        </div>
+    </div>
+
+    <script>
+        // Добавляем интерактивность кнопкам
+        document.querySelectorAll('.channel').forEach(button => {
+            button.addEventListener('click', function(e) {
+                // Создаем эффект ряби
+                const ripple = document.createElement('span');
+                ripple.style.position = 'absolute';
+                ripple.style.borderRadius = '50%';
+                ripple.style.background = 'rgba(255, 255, 255, 0.6)';
+                ripple.style.transform = 'scale(0)';
+                ripple.style.animation = 'ripple 0.6s linear';
+                ripple.style.left = (e.offsetX - 10) + 'px';
+                ripple.style.top = (e.offsetY - 10) + 'px';
+                ripple.style.width = '20px';
+                ripple.style.height = '20px';
+                
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // CSS для анимации ряби
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Добавляем эффект параллакса для частиц
+        document.addEventListener('mousemove', (e) => {
+            const particles = document.querySelectorAll('.particle');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            particles.forEach((particle, index) => {
+                const speed = (index + 1) * 0.5;
+                particle.style.transform += ` translate(${x * speed}px, ${y * speed}px)`;
+            });
+        });
+    </script>
+</body>
+          </html>
